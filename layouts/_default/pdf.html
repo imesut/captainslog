@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Captain's Log</title>
+    <style>
+    body {
+        font-family: 'IBM Plex Sans', sans-serif;
+    }
+
+    .meta {
+        margin-bottom: 20px;
+    }
+
+    .episodeInfo {
+        padding: 10px;
+        background-color: rgb(245, 245, 245);
+        border-radius: 10px;
+    }
+
+    .divider {
+        page-break-after: always;
+    }
+
+    .logo{
+        width: 40%;
+    }
+
+    table, th, td {
+        border: 1px solid;
+    }
+
+    table {
+        border-collapse: collapse;
+    }
+
+    th, td {
+        padding: 6px;
+    }
+
+    @page {
+        size: A4
+    }
+    </style>
+</head>
+
+<body>
+
+    <base href="https://captainslog.mesut.me" />
+
+
+{{/*  A. Cover Page  */}}
+{{ partial "PdfCoverPage.html" . }}
+
+<div class="divider"></div>
+
+{{/*  B. Static Pages  */}}
+{{ with .GetPage "/" }}
+  {{ .Content }}
+{{ end }}
+
+
+{{ range $pageName := (slice "criteria" "scoreboard") }}
+    {{ with $.GetPage $pageName }}
+        <h1>{{.Title}}</h1>
+        {{ .Content }} 
+    {{ end }}
+{{end}}
+
+{{/*  Divider  */}}
+{{ partial "SaluteDivider.html" }} 
+
+
+
+{{/*  B. Reviews  */}}
+
+<h1>Reviewed Episodes in This Document</h1>
+
+{{/* Get Spinoff Codes */}}
+{{ $spinoffData := index .Site.Data "spinoffs" }}
+{{/* https://github.com/gohugoio/hugo/issues/5959#issuecomment-1951373707 */}}
+{{ $keys := slice }}
+{{ range $k, $_ := $spinoffData }}
+    {{ $keys = $keys | append $k }}
+{{ end }}
+
+
+{{/*  B1. Getting Spinoff List */}}
+{{ range $key := ($keys | collections.Reverse) }}
+
+{{ $pagesInThisSpinoff := where $.Site.RegularPages "Params.spinoffCode" $key }}
+    {{/*  If there is at least 1 review, list contents with title.  */}}
+    {{ if gt ($pagesInThisSpinoff | len) 0 }}
+        {{ $spinoffInfo := index $.Site.Data "spinoffs" $key }}
+        <strong>{{ printf "%s (Aired First in: %d)" $spinoffInfo.name ($spinoffInfo.year | int) }}</strong>
+        <ul>
+            {{ range $pagesInThisSpinoff | collections.Reverse }}
+                {{ $postId := printf "%s-%s%s" (.Page.Param "SpinoffCode") (printf "%02d" (.Page.Param "Season")) (printf "%02d" (.Page.Param "Episode")) }}
+                <li><a href="#{{$postId}}">{{.Title}}</a></li>
+            {{ end }}
+        </ul>
+    {{end}}
+{{end}}
+
+
+
+{{/*  Divider  */}}
+{{ partial "SaluteDivider.html" }}
+
+
+
+{{/*  B2. Listing Contents in Spinoffs  */}}
+{{ range $key := ($keys | collections.Reverse) }}
+{{ $spinoffInfo := index $.Site.Data "spinoffs" $key }}
+
+{{ $pagesInThisSpinoff := (where $.Site.RegularPages "Params.spinoffCode" $key) | collections.Reverse }}
+    {{/*  If there is at least 1 review, list contents with title.  */}}
+    {{ if gt ($pagesInThisSpinoff | len) 0 }}
+        <center>
+            <br>
+            <img src="{{$spinoffInfo.logo}}"  class="logo" alt="{{$spinoffInfo.name}} logo">
+            <h1>{{$spinoffInfo.name}} Reviews</h1>
+            First Air Year: {{$spinoffInfo.year}} <br>
+            Reviewed Episodes: {{ $pagesInThisSpinoff | len }} <br><br>
+        </center>
+        {{ range $pagesInThisSpinoff }}
+            {{ partial "PdfFragment.html" .Page }}   
+        {{ end }}
+    {{end}}
+{{end}}
+
+</body>
+</html>

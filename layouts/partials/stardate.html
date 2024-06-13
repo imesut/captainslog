@@ -1,0 +1,22 @@
+{{- $year := .date.Year -}}
+{{- $month := .date.Month -}}
+{{- $day := .date.Day -}}
+
+{{- $isLeapYear := (or (and (eq (mod $year 4) 0) (ne (mod $year 100) 0)) (eq (mod $year 400) 0)) -}}
+
+{{- $daysInYear := cond $isLeapYear 366 365 -}}
+
+{{- $dayOfYearArray := slice 0 31 59 90 120 151 181 212 243 273 304 334 -}}
+{{- $dayOfYear := add (index $dayOfYearArray (sub $month 1)) $day -}}
+{{- if and $isLeapYear (ge $month 3) -}}
+  {{- $dayOfYear = add $dayOfYear 1 -}}
+{{- end -}}
+
+{{- $starYear := mul 1000 (sub $year 2323) -}}
+{{- $starDay := div (mul 1000 $dayOfYear) (float $daysInYear) -}}
+{{- $stardateRaw := add $starYear $starDay -}}
+
+{{/* 100 for Rounding to two decimal places; 1000 for 3 digits, etc. */}}
+{{- $stardateRounded := div (int (mul $stardateRaw 100)) 100.0 -}}
+
+{{- $stardateRounded -}}

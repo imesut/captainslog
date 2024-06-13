@@ -1,0 +1,36 @@
+<center>
+    <div style="height: 5cm;"></div>
+    <span style="font-size: 60px">🖖</span>
+    <h1>Captain's Log</h1>
+    <h2>Star Trek Diaries</h2>
+
+    <div style="height: 1cm;"></div>
+    
+    {{- $stardate := partial "stardate.html" (dict "date" time.Now) -}}
+    <p>
+        <i>Date of This Publication</i>
+        <br>
+        Earth Date: <b>{{ time.Now |  time.Format "Jan 02, 2006"}}</b><br>
+        Stardate: <b>{{ $stardate }}</b>
+    </p>
+
+    <div style="height: 1cm;"></div>
+
+    <p>
+        To catch-up with the latest posts,
+        <br>
+        Please <a href="https://captainslog.mesut.me">Visit Blog Online</a>
+    </p>
+
+    <div style="height: 1cm;"></div>
+    <span>·</span>
+    <div style="height: 1cm;"></div>
+    <i>Reviews written by <a href="https://mesut.me">Mesut Yılmaz</a></i>
+    <div style="height: 2cm;"></div>
+
+    {{ range $spinoff := sort (index .Site.Data.spinoffs) "year" "asc" }}
+        {{ if $spinoff.logo }}
+            <img style="width: 60px; padding: 12px" src="{{$spinoff.logo}}" alt="{{$spinoff.name}} {{$spinoff.year}} Logo">
+        {{ end }}
+    {{end}}
+</center>

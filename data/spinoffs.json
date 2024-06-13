@@ -1,0 +1,70 @@
+{
+    "TOS": {
+        "name": "The Original Series",
+        "year": 1966,
+        "logo": "/TOS.svg"
+    },
+    "TAS": {
+        "name": "The Animated Series",
+        "year": 1973,
+        "logo": "/TAS.svg"
+    },
+    "TNG": {
+        "name": "The Next Generation",
+        "year": 1987,
+        "logo": "/TNG.svg"
+    },
+    "DS9": {
+        "name": "Deep Space Nine",
+        "year": 1993,
+        "logo": "/DS9.svg"
+    },
+    "VOY": {
+        "name": "Voyager",
+        "year": 1995,
+        "logo": "/VOY.svg"
+    },
+    "ENT": {
+        "name": "Enterprise",
+        "year": 2001,
+        "logo": "/ENT.svg"
+    },
+    "DIS": {
+        "name": "Discovery",
+        "year": 2017,
+        "logo": "/DIS.svg"
+    },
+    "SHO": {
+        "name": "Short Treks",
+        "year": 2018,
+        "logo": "/SHO.jpeg"
+    },
+    "LOW": {
+        "name": "Lower Decks",
+        "year": 2020,
+        "logo": "/LOW.svg"
+    },
+    "PIC": {
+        "name": "Picard",
+        "year": 2020,
+        "logo": "/PIC.svg"
+    },
+    "PRO": {
+        "name": "Prodigy",
+        "year": 2021,
+        "logo": "/PRO.svg"
+    },
+    "SNW": {
+        "name": "Strange New Worlds",
+        "year": 2022,
+        "logo": "/SNW.svg"
+    },
+    "MOV": {
+        "name": "All 13 films",
+        "year": 1979
+    },
+    "KLV": {
+        "name": "Kelvin Timeline",
+        "year": ""
+    }
+}

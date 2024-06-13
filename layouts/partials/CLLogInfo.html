@@ -1,0 +1,60 @@
+{{ $values := .Page.Param "StarTrekValues" }}
+{{ $inspiring := .Page.Param "Inspiring" }}
+{{ $storyDev := .Page.Param "StoryDevelopment" }}
+{{ $spinoffCode := .Page.Param "SpinoffCode" }}
+{{ $spinoffData := index .Site.Data "spinoffs" $spinoffCode }}
+
+<div id="CLLogInfo" class="post-content">
+    
+    <center style="margin-bottom: 24px; margin-top: -12px">
+        <span style="font-size: 12px;"><a href='{{.Page.Param "imdb"}}'>Image Credits: IMDB</a> 🖖</span>
+    </center>
+
+    {{/* {{ if $spinoffData.logo }}
+    <a href='/tags/{{ $spinoffCode }}'>
+        <img src="{{ $spinoffData.logo }}" alt="{{$spinoffData.name}} Spinoff Logo" height="40">
+    </a>
+    {{ end }} */}}
+    <code>
+        <a href='/tags/{{ $spinoffCode }}'>{{ $spinoffData.name }}-{{ $spinoffData.year }}</a>
+    </code>
+    <code>
+        Season: {{- printf "%02d" (.Page.Param "Season") -}}    
+    </code>
+    <code>
+        Episode: {{- printf "%02d" (.Page.Param "Episode") -}}      
+    </code>
+
+
+    <br><br>
+
+    <code>
+        Overall Score: &emsp;&emsp;&emsp;&emsp;&emsp; <strong>
+            {{ div (float (mul $values $inspiring $storyDev 100)) (mul 5 5 5) }}
+        </strong> / 100
+    </code>
+    <br>
+    <code>
+        Star Trek Values: &emsp;&emsp; {{ $values }} / 5
+    </code>
+    <br>
+    <code>
+        Inspiring: &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp; {{ $inspiring }} / 5
+    </code>
+    <br>
+    <code>
+        Story Development: &emsp; {{ $storyDev }} / 5
+    </code>
+
+
+    {{ if (.Page.Param "imdb") }}
+    <br><br>
+    <code>
+            <a href='{{.Page.Param "imdb"}}'>View Episode (Imbd)</a>
+        </code>
+    {{ end }}
+
+
+    <br>
+    <br>
+</div>

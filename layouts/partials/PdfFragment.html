@@ -1,0 +1,27 @@
+
+{{ $postId := printf "%s-%s%s" (.Page.Param "SpinoffCode") (printf "%02d" (.Page.Param "Season")) (printf "%02d" (.Page.Param "Episode")) }}
+
+<div class="post" id="{{$postId}}">
+  <h1>{{- .Title -}}</h1>
+
+  <div class="meta">
+    <i>
+      {{- partial "post_meta.html" . -}}
+    </i>
+  </div>
+
+  {{- if .Content }}
+
+  {{ if .Param "SpinoffCode"}}
+  <div class="episodeInfo">
+    {{- partial "CLLogInfo.html" . -}}
+  </div>
+  {{ end }}
+
+  {{ .Content }}
+
+  {{- end }}
+
+</div>
+
+{{ partial "SaluteDivider.html" }}

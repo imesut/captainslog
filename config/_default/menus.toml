@@ -1,0 +1,19 @@
+[[main]]
+  name = "Home"
+  url = "/"
+  weight = 1
+
+[[main]]
+  name = "Score Board"
+  url = "/scoreboard"
+  weight = 2
+
+[[main]]
+  name = "Reviews"
+  url = "/review"
+  weight = 3
+
+[[main]]
+  name = "View Author's Blog"
+  url = "https://mesut.me"
+  weight = 4

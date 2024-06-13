@@ -1,0 +1,63 @@
+<table class="sortable" id="CLTable">
+    <tr>
+        <th>Spinoff</th>
+        <th>Episode Code</th>
+        <th>Name</th>
+        <th>Episode</th>
+        <th colspan="2">Overall Score</th>
+        {{/*  <th>Star Trek Values</th>
+        <th>Inspiring</th>
+        <th>Story Development</th>  */}}
+    </tr>
+
+    {{- range (where .Site.RegularPages "Section" "review") -}}   
+        {{ $values := .Param "StarTrekValues" }}
+        {{ $inspiring := .Param "Inspiring" }}
+        {{ $storyDev := .Param "StoryDevelopment" }} 
+        <tr>
+
+            {{ $code := .Param "SpinoffCode"}}
+            {{- $spinoff := (index .Site.Data "spinoffs" $code) -}}
+            {{- $seasonNo := printf "%02d" (.Param "Season") -}}
+            {{- $episodeNo := printf "%02d" (.Param "Episode") -}}
+            {{- $episodeName := .Param "EpisodeName" -}}
+            {{- $totalScore := div (float (mul $values $inspiring $storyDev 100)) (mul 5 5 5) -}}
+            {{- $starCount := (int (add (div $totalScore 20) 1)) -}}
+            
+            {{- $filledStars := strings.Repeat $starCount "⭐️" -}}
+            {{- $emptyStars := strings.Repeat (sub 5 $starCount) "☆" -}}
+            {{- $stars := printf "%s%s" $filledStars $emptyStars -}}
+            
+            {{- $link := .RelPermalink -}}
+
+            {{/*  Spinoff  */}}
+            <td>
+                <a href="/tags/{{$code}}" class="href">
+                {{/*  <span style="font-size: 12px;">{{ $spinoff.name }}</span>  */}}
+                <img src="{{$spinoff.logo}}" alt="{{$spinoff.name}} Logo" title="{{$spinoff.name}}" height="22" style="margin: 0;">
+            </a>
+            </td>
+
+            {{/*  Episode Code  */}}
+            <td>{{ $code }}-{{- $seasonNo -}}{{- $episodeNo -}}</td>
+            
+            {{/*  Episode Name  */}}
+            <td><a href='{{ $link }}'>{{$episodeName}}</a></td>
+
+            {{/*  <td>{{- $seasonNo -}}</td>
+            <td>{{- $episodeNo -}}</td>  */}}
+            <td>{{ $totalScore }}</td>
+            <td>{{ $stars }}</td>
+            {{/*  <td><a href='{{ $link }}'>View</a></td>  */}}
+        </tr>
+    {{- end -}}
+</table>
+
+<script src="/sorttable.js"></script>
+
+<style>
+    table.sortable th:not(.sorttable_sorted):not(.sorttable_sorted_reverse):not(.sorttable_nosort):after { 
+        content: " \25B4\25BE";
+    }
+
+</style>

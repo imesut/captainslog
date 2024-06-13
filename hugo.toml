@@ -1,0 +1,28 @@
+baseURL = '/'
+title = "Captain's Log 🖖"
+theme = 'PaperMod'
+summaryLength = 15
+
+[outputs]
+home = ["HTML", "RSS", "JSON"]
+
+[markup.goldmark.renderer]
+  unsafe = true
+
+[taxonomies]
+  tag = 'tags'
+
+[Params]
+  defaultTheme = "auto"
+  mainSections = ["blog"]
+  ShowToc = true
+  ShowBreadCrumbs = true
+  author = ["Mesut Yılmaz"]
+  comments = true
+
+[services]
+  [services.googleAnalytics]
+    ID = 'G-BK27G1021R'
+  [services.disqus]
+    shortname = 'mesut-me'
+
