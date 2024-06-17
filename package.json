@@ -4,17 +4,16 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "dev": "tinacms dev -c \"hugo serve\"",
+    "dev": "tinacms dev -c \"open http://localhost:1313/admin/#/collections/review/ && hugo serve\"",
     "pdf": "/Applications/Google\\ Chrome.app/Contents/MacOS/Google\\ Chrome --headless --print-to-pdf=public/captainslog.pdf --no-pdf-header-footer file:\/\/$(pwd)/public/pdf/index.html; cp public/captainslog.pdf content/captainslog.pdf;",
     "images": "node fetchIMDBFeaturedImages.mjs",
     "build": "tinacms dev -c \"hugo; npm run images\"; npm run pdf",
-    "publish": "npm run pack; netlify deploy --dir=public --prod;"
+    "publish": "npm run build; netlify deploy --dir=public --prod;"
   },
   "keywords": [],
   "author": "",
   "license": "ISC",
   "dependencies": {
-    "@apollo/client": "^3.10.4",
     "cheerio": "^1.0.0-rc.12",
     "graphql": "^16.8.1",
     "node-fetch": "^3.3.2",
