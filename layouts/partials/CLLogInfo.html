@@ -30,20 +30,20 @@
 
     <code>
         Overall Score: &emsp;&emsp;&emsp;&emsp;&emsp; <strong>
-            {{ div (float (mul $values $inspiring $storyDev 100)) (mul 5 5 5) }}
+            {{- printf "%.2f" (div (float (mul $values $inspiring $storyDev 100)) (mul 5 5 5)) -}}
         </strong> / 100
     </code>
     <br>
     <code>
-        Star Trek Values: &emsp;&emsp; {{ $values }} / 5
+        Star Trek Values: &emsp;&emsp; {{ printf "%.2f" (float $values) }} / 5
     </code>
     <br>
     <code>
-        Inspiring: &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp; {{ $inspiring }} / 5
+        Inspiring: &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp; {{ printf "%.2f" (float $inspiring) }} / 5
     </code>
     <br>
     <code>
-        Story Development: &emsp; {{ $storyDev }} / 5
+        Story Development: &emsp; {{ printf "%.2f" (float $storyDev) }} / 5
     </code>
 
 

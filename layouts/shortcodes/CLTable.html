@@ -45,7 +45,7 @@
 
             {{/*  <td>{{- $seasonNo -}}</td>
             <td>{{- $episodeNo -}}</td>  */}}
-            <td>{{ $totalScore }}</td>
+            <td>{{- printf "%.2f" (float $totalScore) -}}</td>
             <td>{{ $stars }}</td>
             {{/*  <td><a href='{{ $link }}'>View</a></td>  */}}
         </tr>
