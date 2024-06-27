@@ -12,6 +12,8 @@
 
   {{- if .Content }}
 
+  <div style="padding-left: 25px;">
+
   {{ if .Param "SpinoffCode"}}
   <div class="episodeInfo">
     {{- partial "CLLogInfo.html" . -}}
@@ -21,6 +23,8 @@
   {{ .Content }}
 
   {{- end }}
+
+  </div>
 
 </div>
 

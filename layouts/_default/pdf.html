@@ -19,7 +19,7 @@
         border-radius: 10px;
     }
 
-    .divider {
+    .pageBreak {
         page-break-after: always;
     }
 
@@ -40,7 +40,18 @@
     }
 
     @page {
-        size: A4
+        size: A4;
+    }
+
+    @media print{
+        body {
+            line-height: 150%;
+            font-size: 90%;
+        }
+
+        h1, h2, h3, h4{
+            line-height: 150%;
+        }
     }
     </style>
 </head>
@@ -53,11 +64,12 @@
 {{/*  A. Cover Page  */}}
 {{ partial "PdfCoverPage.html" . }}
 
-<div class="divider"></div>
+<div class="pageBreak"></div>
 
 {{/*  B. Static Pages  */}}
 {{ with .GetPage "/" }}
   {{ .Content }}
+  <div class="pageBreak"></div>
 {{ end }}
 
 
@@ -65,13 +77,9 @@
     {{ with $.GetPage $pageName }}
         <h1>{{.Title}}</h1>
         {{ .Content }} 
+        <div class="pageBreak"></div>
     {{ end }}
 {{end}}
-
-{{/*  Divider  */}}
-{{ partial "SaluteDivider.html" }} 
-
-
 
 {{/*  B. Reviews  */}}
 
@@ -106,7 +114,7 @@
 
 
 {{/*  Divider  */}}
-{{ partial "SaluteDivider.html" }}
+<div class="pageBreak"></div>
 
 
 
@@ -127,6 +135,7 @@
         {{ range $pagesInThisSpinoff }}
             {{ partial "PdfFragment.html" .Page }}   
         {{ end }}
+        <div class="pageBreak"></div>
     {{end}}
 {{end}}
 
