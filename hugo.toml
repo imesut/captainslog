@@ -22,7 +22,7 @@ home = ["HTML", "RSS", "JSON"]
 
 [services]
   [services.googleAnalytics]
-    ID = 'G-BK27G1021R'
+    ID = 'G-G5JDEZL30M'
   [services.disqus]
     shortname = 'mesut-me'
 
