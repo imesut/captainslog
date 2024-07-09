@@ -2,69 +2,79 @@
     "TOS": {
         "name": "The Original Series",
         "year": 1966,
-        "logo": "/TOS.svg"
+        "logo": "/TOS.svg",
+        "episodeCount": 80
     },
     "TAS": {
         "name": "The Animated Series",
         "year": 1973,
-        "logo": "/TAS.svg"
+        "logo": "/TAS.svg",
+        "episodeCount": 22
+
     },
     "TNG": {
         "name": "The Next Generation",
         "year": 1987,
-        "logo": "/TNG.svg"
+        "logo": "/TNG.svg",
+        "episodeCount": 178
     },
     "DS9": {
         "name": "Deep Space Nine",
         "year": 1993,
-        "logo": "/DS9.svg"
+        "logo": "/DS9.svg",
+        "episodeCount": 176
     },
     "VOY": {
         "name": "Voyager",
         "year": 1995,
-        "logo": "/VOY.svg"
+        "logo": "/VOY.svg",
+        "episodeCount": 172
     },
     "ENT": {
         "name": "Enterprise",
         "year": 2001,
-        "logo": "/ENT.svg"
+        "logo": "/ENT.svg",
+        "episodeCount": 98
     },
     "DIS": {
         "name": "Discovery",
         "year": 2017,
-        "logo": "/DIS.svg"
+        "logo": "/DIS.svg",
+        "episodeCount": 65
     },
     "SHO": {
         "name": "Short Treks",
         "year": 2018,
-        "logo": "/SHO.jpeg"
+        "logo": "/SHO.jpeg",
+        "episodeCount": 10
     },
     "LOW": {
         "name": "Lower Decks",
         "year": 2020,
-        "logo": "/LOW.svg"
+        "logo": "/LOW.svg",
+        "episodeCount": 40
     },
     "PIC": {
         "name": "Picard",
         "year": 2020,
-        "logo": "/PIC.svg"
+        "logo": "/PIC.svg",
+        "episodeCount": 30
     },
     "PRO": {
         "name": "Prodigy",
         "year": 2021,
-        "logo": "/PRO.svg"
+        "logo": "/PRO.svg",
+        "episodeCount": 20
     },
     "SNW": {
         "name": "Strange New Worlds",
         "year": 2022,
-        "logo": "/SNW.svg"
+        "logo": "/SNW.svg",
+        "episodeCount": 20
     },
     "MOV": {
         "name": "All 13 films",
-        "year": 1979
-    },
-    "KLV": {
-        "name": "Kelvin Timeline",
-        "year": ""
+        "year": 1979,
+        "episodeCount": 13
     }
 }

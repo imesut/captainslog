@@ -10,9 +10,9 @@
     </tr>
 
     {{- range (where .Site.RegularPages "Section" "review") -}}   
-        {{ $values := .Param "StarTrekValues" }}
+        {{/*  {{ $values := .Param "StarTrekValues" }}
         {{ $inspiring := .Param "Inspiring" }}
-        {{ $storyDev := .Param "StoryDevelopment" }} 
+        {{ $storyDev := .Param "StoryDevelopment" }}   */}}
         <tr>
 
             {{ $code := .Param "SpinoffCode"}}
@@ -20,7 +20,8 @@
             {{- $seasonNo := printf "%02d" (.Param "Season") -}}
             {{- $episodeNo := printf "%02d" (.Param "Episode") -}}
             {{- $episodeName := .Param "EpisodeName" -}}
-            {{- $totalScore := div (float (mul $values $inspiring $storyDev 100)) (mul 5 5 5) -}}
+            {{/*  {{- $totalScore := div (float (mul $values $inspiring $storyDev 100)) (mul 5 5 5) -}}  */}}
+            {{- $totalScore := .Param "OverallScore" -}}
             {{- $starCount := (int (add (div $totalScore 20) 1)) -}}
             
             {{- $filledStars := strings.Repeat $starCount "⭐️" -}}

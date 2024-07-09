@@ -8,9 +8,9 @@ Title: "Captain’s Log - Star Trek Diaries"
 {{< button text="View Scoreboard" target="/scoreboard" >}}
 {{< button text="Read Reviews" target="/review" >}}
 
-I'm [Mesut](https://mesut.me), I’m a Trekkie, inspired by Gene Roddenberry’s wisdom and art. In this sub-blog, I’m trying to share my thoughts on episodes of the Star Trek spinoffs.
+**Hi There 🖖**
 
-I watched the whole spinoffs of Star Trek (except some of the modern! replications) and I enjoyed a lot. I decided to re-watch Star Trek from scratch and took notes *(assimilate in [Borg](https://memory-alpha.fandom.com/wiki/Borg) terminology)*.
+I'm [Mesut](https://mesut.me), I’m a Trekkie, inspired by Gene Roddenberry’s wisdom and art. In this sub-blog, I’m trying to share my thoughts on episodes of the Star Trek spinoffs.
 
 I believe each Star Trek instance worth thinking on it. Not all of the episodes are equal, so I’m applying 3-pillar scoring for episodes for ranking them and learning more from them.
 
@@ -20,13 +20,23 @@ Last thing, let's remember what was Star Trek from its original series creator G
 > 
 > — Gene Roddenberry
 
-As Vulcans say;
+Live Long and Prosper🖖
 
-Live Long and Prosper, all 🖖
+![Gene Roddenberry beside a model of Enterprise NCC 1701 ship](roddenberry.jpeg)
 
 ---
 
-This Blog is also available as:
+**This Blog is also available as:**
 
 {{< button text="RSS Feed" target="/index.xml" >}}
 {{< button text="PDF (latest)" target="/captainslog.pdf" >}}
+
+---
+
+**Follow my re-watch progress below;**
+
+I watched the whole spinoffs of Star Trek (except some of the modern! replications) and I enjoyed a lot. I decided to re-watch *(and assimilate\*)* Star Trek from scratch and took notes.
+
+{{< SpinoffsList >}}
+
+*[see: Borg](https://memory-alpha.fandom.com/wiki/Borg)

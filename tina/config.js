@@ -34,6 +34,7 @@ export default defineConfig({
         path: "content/review",
         defaultItem: {
           Title: "SPN-SSEE [AUTO]",
+          OverallScore: 0,
           cover: {
             image: "/episodeImages/SPN-SSEE.jpg[AUTO]",
             alt: "Cover Photo of <SPN-Episode Name> [AUTO]"
@@ -52,13 +53,13 @@ export default defineConfig({
             cms,
             values,
           }) => {
-            console.log(values)
             return {
               ...values,
               cover: {
                 image: "/episodeImages/" + values.SpinoffCode + "-" + ("0" + values?.Season).slice(-2) + ("0" + values?.Episode).slice(-2) + ".jpg",
                 alt: "Cover Photo of " + values.SpinoffCode + " " + ("0" + values?.Season).slice(-2) + ("0" + values?.Episode).slice(-2) + " " + values.EpisodeName 
               },
+              OverallScore: Number((values.StarTrekValues * values.Inspiring * values.StoryDevelopment / ( 5 * 5 * 5 ) * 100).toFixed(2)),
               Title: values?.SpinoffCode + "-" + ("0" + values?.Season).slice(-2) + ("0" + values?.Episode).slice(-2) + " " + values?.EpisodeName,
             }
           }
@@ -126,10 +127,6 @@ export default defineConfig({
                 "value": "MOV",
                 "label": "All 13 films"
               },
-              {
-                "value": "KLV",
-                "label": "Kelvin Timeline"
-              }
             ]
           },
           {
@@ -161,6 +158,12 @@ export default defineConfig({
             type: "number",
             name: "StoryDevelopment",
             required: true,
+          },
+          {
+            type: "number",
+            name: "OverallScore",
+            required: true,
+            label: "[AUTO] Overall Score"
           },
           {
             type: "string",

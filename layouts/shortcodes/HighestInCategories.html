@@ -1,0 +1,62 @@
+<table id="HighestInCategories">
+    
+    <tr>
+        <th>Best of</th>
+        <th colspan="2">Episode Name</th>
+        <th>Score</th>
+    </tr>
+
+    {{ .Scratch.Set "field" "OverallScore" }}
+    {{ .Scratch.Set "fieldName" "Overall Best" }}
+    {{ .Scratch.Set "showPoint" false }}
+    {{ partial "CategoryRow.html" . }}
+
+    {{ .Scratch.Set "showPoint" true }}
+
+    {{ .Scratch.Set "field" "StarTrekValues" }}
+    {{ .Scratch.Set "fieldName" "Star Trek Values" }}
+    {{ partial "CategoryRow.html" . }}
+
+    {{ .Scratch.Set "field" "Inspiring" }}
+    {{ .Scratch.Set "fieldName" "Inspiration" }}
+    {{ partial "CategoryRow.html" . }}
+
+
+    {{ .Scratch.Set "field" "StoryDevelopment" }}
+    {{ .Scratch.Set "fieldName" "Story Development" }}
+    {{ partial "CategoryRow.html" . }}
+
+</table>
+
+
+
+{{ define "partials/CategoryRow.html"}}
+
+{{ $paramName := (printf "Params.%s" (.Scratch.Get "field"))}}
+{{ $fieldName := .Scratch.Get "fieldName" }}
+{{ $field := .Scratch.Get "field" }}
+{{ $showPoint := .Scratch.Get "showPoint" }}
+
+<tr>
+    {{ $episode := index (sort (where .Site.RegularPages "Section" "review") $paramName "desc") 0 }}
+    {{ $spinoff := (index .Site.Data "spinoffs" ($episode.Param "SpinoffCode")) }}
+    <td>
+        {{ $fieldName }}
+        {{ if $showPoint }}
+            ({{ $episode.Param $field }} / 5)
+        {{ end }}
+    </td>
+    <td>
+        <a href="/tags/{{$episode.Param " SpinoffCode"}}" class="href">
+            <img src="{{$spinoff.logo}}" alt="{{$spinoff.name}} Logo" title="{{$spinoff.name}}" height="22" style="margin: 0;">
+        </a>
+    </td>
+    <td>
+        <a href="{{$episode.RelPermalink}}">
+            {{ $episode.Title }}
+        </a>
+    </td>
+    <td>{{ printf "%.2f" (float ($episode.Param "OverallScore")) }} / 100</td>
+</tr>
+
+{{ end }}
