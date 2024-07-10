@@ -1,3 +1,5 @@
+{{ $s := .Scratch }}
+
 {{/* Get Spinoff Codes */}}
 {{ $spinoffData := index .Site.Data "spinoffs" }}
 {{/* https://github.com/gohugoio/hugo/issues/5959#issuecomment-1951373707 */}}
@@ -6,12 +8,9 @@
     {{ $keys = $keys | append $k }}
 {{ end }}
 
-
-
-{{/*  {{ $episodesInSpinoff := slice }}  */}}
+{{/* {{ $episodesInSpinoff := slice }} */}}
 
 <table>
-
     <tr>
         <th colspan="2">Spinoff</th>
         <th>Air Date</th>
@@ -19,17 +18,20 @@
         <th style="text-align: center;">Best - Average - Minimum Scores</th>
     </tr>
 
-    {{/*  B1. Getting Spinoff List */}}
+    {{/* B1. Getting Spinoff List */}}
     {{ range $key := ($keys | collections.Reverse) }}
+
         {{ $spinoffInfo := index $.Site.Data "spinoffs" $key }}
 
-        {{/*  {{ $episodesInSpinoff := $episodesInSpinoff | append $spinoffInfo.episodeCount }}  */}}
+        {{/* {{ $episodesInSpinoff := $episodesInSpinoff | append $spinoffInfo.episodeCount }} */}}
 
         {{ $pagesInThisSpinoff := where $.Site.RegularPages "Params.spinoffCode" $key }}
 
         {{ $episodeCount := $pagesInThisSpinoff | len }}
-        {{/*  If there is at least 1 review, list contents with title.  */}}
+        
+        {{/* If there is at least 1 review, list contents with title. */}}
         {{ if gt $episodeCount 0 }}
+
             {{ $spinoffTotal := $spinoffInfo.episodeCount }}
 
             {{ $scores := slice }}
@@ -38,13 +40,6 @@
                     {{ $scores = $scores | append . }}
                 {{ end }}
             {{ end }}
-
-            {{ $max := float (math.Max $scores) }}
-            {{ $min := float (math.Min $scores) }}
-            {{ $avg := float (math.Div (math.Sum $scores) $episodeCount) }}
-            {{ $maxScore := printf "%.2f" $max }}
-            {{ $minScore := printf "%.2f" $min }}
-            {{ $averageScore := printf "%.2f" $avg }}
 
             {{ $spinoff := (index $.Site.Data "spinoffs" $key ) }}
 
@@ -68,56 +63,36 @@
                     </span>
                 </td>
                 <td style="text-align: center;">
-                    <div style="
-                                height: 20px; 
-                                background-color:#F1F8E8; 
-                                width: 100%; 
-                                display: inline-flex; 
-                                border: 1px solid;">
-                        
-                        <div style="
-                                    width: {{$min}}%;
-                                    background-color: #D8EFD3; 
-                                    "></div>
-                        <div style="
-                                    width: {{math.Sub $avg $min}}%; 
-                                    background-color: #95D2B3"></div>
-                        <div style="
-                                    width: {{math.Sub $max $avg}}%; 
-                                    background-color: #55AD9B;
-                                    "></div>
-                </div>
-                <span style="font-size: small; margin-top: 0px">
-                    {{ $minScore }} - {{ $averageScore }} - {{ $maxScore }}
-                </span>
-            </td>
+
+                    {{ $max := float (math.Max $scores) }}
+                    {{ $min := float (math.Min $scores) }}
+                    {{ $avg := float (math.Div (math.Sum $scores) $episodeCount) }}
+                    {{ $s.Set "min" (string $min) }}
+                    {{ $s.Set "avg" (string $avg) }}
+                    {{ $s.Set "max" (string $max) }}
+                    {{ partial "segmentedProgressBar.html" $ }}
+
+                </td>
             </tr>
 
         {{end}}
     {{end}}
 
 
-    {{/*  Overall  */}}
+    {{/* Overall */}}
     <tr style="font-weight: bold">
         {{ $allEpisodes := where $.Site.RegularPages "Section" "review" }}
         {{ $episodeCount := $allEpisodes | len }}
-        {{/*  {{ $grandtotal := math.Sum $episodesInSpinoff }}  */}}
+        {{/* {{ $grandtotal := math.Sum $episodesInSpinoff }} */}}
         {{ $grandtotal := 924 }}
 
         {{ $scores := slice }}
         {{ range $allEpisodes }}
-            {{ with .Params.OverallScore }}
-                {{ $scores = $scores | append . }}
-            {{ end }}
+        {{ with .Params.OverallScore }}
+        {{ $scores = $scores | append . }}
+        {{ end }}
         {{ end }}
 
-        {{ $max := float (math.Max $scores) }}
-        {{ $min := float (math.Min $scores) }}
-        {{ $avg := float (math.Div (math.Sum $scores) $episodeCount) }}
-        {{ $maxScore := printf "%.2f" $max }}
-        {{ $minScore := printf "%.2f" $min }}
-        {{ $averageScore := printf "%.2f" $avg }}
-        
         <td colspan="3">Overall</td>
         <td style="text-align: center;">
             {{ $episodeCount }} / {{ $grandtotal }}
@@ -127,29 +102,15 @@
             </span>
         </td>
         <td style="text-align: center;">
-            <div style="
-                        height: 20px; 
-                        background-color:#F1F8E8; 
-                        width: 100%; 
-                        display: inline-flex; 
-                        border: 1px solid;">
-                
-                <div style="
-                            width: {{$min}}%;
-                            background-color: #D8EFD3;">
-                        </div>
-                <div style="
-                            width: {{math.Sub $avg $min}}%; 
-                            background-color: #95D2B3">
-                        </div>
-                <div style="
-                            width: {{math.Sub $max $avg}}%; 
-                            background-color: #55AD9B;">
-                        </div>
-            </div>
-            <span style="font-size: small; margin-top: 0px">
-                {{ $minScore }} - {{ $averageScore }} - {{ $maxScore }}
-            </span>
+
+            {{ $min := float (math.Min $scores) }}
+            {{ $avg := float (math.Div (math.Sum $scores) $episodeCount) }}
+            {{ $max := float (math.Max $scores) }}
+            {{ .Scratch.Set "min" (string $min) }}
+            {{ .Scratch.Set "avg" (string $avg) }}
+            {{ .Scratch.Set "max" (string $max) }}
+            {{ partial "segmentedProgressBar.html" . }}
+
         </td>
     </tr>
 

@@ -1,14 +1,11 @@
 ---
 Title: "Captain’s Log - Star Trek Diaries"
+showToc: false
 ---
 
 # Captain’s Log - Star Trek Diaries
 
-{{< button text="View Criteria" target="/criteria" >}}
-{{< button text="View Scoreboard" target="/scoreboard" >}}
-{{< button text="Read Reviews" target="/review" >}}
-
-**Hi There 🖖**
+## Hi There 🖖
 
 I'm [Mesut](https://mesut.me), I’m a Trekkie, inspired by Gene Roddenberry’s wisdom and art. In this sub-blog, I’m trying to share my thoughts on episodes of the Star Trek spinoffs.
 
@@ -26,14 +23,17 @@ Live Long and Prosper🖖
 
 ---
 
-**This Blog is also available as:**
+{{< button text="View Criteria" target="/about" >}}
+{{< button text="View Scoreboard" target="/scoreboard" >}}
+{{< button text="Read Reviews" target="/review" >}}
 
-{{< button text="RSS Feed" target="/index.xml" >}}
+
+*This Blog is also available as:* {{< button text="RSS Feed" target="/index.xml" >}}
 {{< button text="PDF (latest)" target="/captainslog.pdf" >}}
 
 ---
 
-**Follow my re-watch progress below;**
+## My re-watch progress
 
 I watched the whole spinoffs of Star Trek (except some of the modern! replications) and I enjoyed a lot. I decided to re-watch *(and assimilate\*)* Star Trek from scratch and took notes.
 

@@ -2,6 +2,7 @@ baseURL = '/'
 title = "Captain's Log 🖖"
 theme = 'PaperMod'
 summaryLength = 15
+images = "Logo.svg"
 
 [outputs]
 home = ["HTML", "RSS", "JSON"]
@@ -19,6 +20,11 @@ home = ["HTML", "RSS", "JSON"]
   ShowBreadCrumbs = true
   author = ["Mesut Yılmaz"]
   comments = true
+  hideFooter = true
+  label.icon = "Logo.svg"
+  label.iconHeight = 40
+  label.text = " "
+
 
 [services]
   [services.googleAnalytics]

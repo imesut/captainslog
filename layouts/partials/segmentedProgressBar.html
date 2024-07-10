@@ -1,0 +1,42 @@
+{{ $min := float (.Scratch.Get "min") }}
+{{ $avg := float (.Scratch.Get "avg") }}
+{{ $max := float (.Scratch.Get "max") }}
+
+
+{{ $maxScore := printf "%.1f" $max }}
+{{ $minScore := printf "%.1f" $min }}
+{{ $averageScore := printf "%.1f" $avg }}
+
+{{ $percentageMin := $min }}
+{{ $percentageMid := math.Sub $avg $min }}
+{{ $percentageMax := math.Sub $max $avg }}
+
+<div class="segmentedProgressBar">
+    <div style="
+                height: 20px; 
+                background-color:#F1F8E8; 
+                width: 100%; 
+                display: inline-flex; 
+                border: 1px solid;">
+
+        <div style="width: {{$percentageMin}}%;">
+        </div>
+
+        <div style="width: {{$percentageMid}}%; 
+                    background-color: #95D2B3;
+                    min-width: 1px;
+                    margin: -1px;
+                    z-index: 2;
+                    border: 1px solid">
+        </div>
+        <div style="width: {{$percentageMax}}%; 
+                    background-color: #55AD9B;
+                    border: 1px solid;
+                    margin: -1px;">
+        </div>
+    </div>
+
+    <span style="font-size: small; margin-top: 0px">
+        {{ $minScore }} - {{ $averageScore }} - {{ $maxScore }}
+    </span>
+</div>
