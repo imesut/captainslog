@@ -31,6 +31,11 @@ Live Long and Prosper🖖
 *This Blog is also available as:* {{< button text="RSS Feed" target="/index.xml" >}}
 {{< button text="PDF (latest)" target="/captainslog.pdf" >}}
 
+**Open Source**: This blog is an open-sourced blog. Feel free to fork / clone it to build your own Star-Trek themed blog.
+
+[![GitHub Link](https://img.shields.io/badge/github-%23121011.svg?style=for-the-badge&logo=github&logoColor=white) ![License: GPL v3](https://img.shields.io/badge/License-GPLv3-blue.svg)](https://github.com/imesut/captainslog/)
+
+
 ---
 
 ## My re-watch progress
