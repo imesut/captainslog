@@ -5,8 +5,8 @@ themes/
 static/episodeImages/
 public/
 
-
-
+allEpisodes.json
+reviews.json
 
 
 # Default Gitignore

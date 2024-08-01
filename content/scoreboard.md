@@ -9,15 +9,21 @@ As I'm rewatching the Star Trek series from scratch again, the reviews are follo
 
 Here is the score board of my evaluation for each episodes.
 
+<!-- [Episodes List](#episodes-scored)
 
-**General Scores**
+[Categoric Bests](#best-episodes-under-categories)
 
-{{< SpinoffsList >}}
+[General Spinoff Scores](#general-spinoff-scores)
+ -->
 
-**Best Episodes under Categories**
+## All Episodes, Scored
+
+{{< CLTable >}}
+
+## Best in Its Category
 
 {{< HighestInCategories >}}
 
-**Episodes, Scored**
+## Spinoff Scores Listed
 
-{{< CLTable >}}
+{{< SpinoffsList >}}
