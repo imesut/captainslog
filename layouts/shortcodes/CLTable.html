@@ -9,7 +9,8 @@
         <th>Story Development</th>  */}}
     </tr>
 
-    {{- range (where .Site.RegularPages "Section" "review") -}}   
+
+    {{- range (sort (where .Site.RegularPages "Section" "review" ) "Params.OverallScore" "desc" ) -}}
         {{/*  {{ $values := .Param "StarTrekValues" }}
         {{ $inspiring := .Param "Inspiring" }}
         {{ $storyDev := .Param "StoryDevelopment" }}   */}}
