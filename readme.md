@@ -28,3 +28,8 @@ First install Hugo, in Mac environment, it's `brew install hugo` Then install Ti
 **Run Site for Preview:** `npm run dev` (runs with TinaCMS admin panel) or `hugo serve` (only runs Hugo's live server without Tina)
 
 **Fetching Cover Images:** `npm run images`
+
+TODO
+- It uses nde version 18.20.8
+- Requires creating static/episodeImages folder
+

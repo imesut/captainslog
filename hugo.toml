@@ -32,3 +32,6 @@ home = ["HTML", "RSS", "JSON"]
   [services.disqus]
     shortname = 'mesut-me'
 
+[module]
+[[module.imports]]
+  path = 'github.com/adityatelange/hugo-PaperMod'

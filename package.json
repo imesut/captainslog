@@ -9,7 +9,7 @@
     "pdf": "/Applications/Google\\ Chrome.app/Contents/MacOS/Google\\ Chrome --headless --print-to-pdf=public/captainslog.pdf --no-pdf-header-footer file://$(pwd)/public/pdf/index.html; cp public/captainslog.pdf content/captainslog.pdf;",
     "images": "npm run metadata; node fetchImages.mjs",
     "build": "hugo; npm run images; npm run pdf",
-    "publish": "npm run build; netlify deploy --dir=public --prod;",
+    "publish": "npm run build; netlify deploy --no-build --dir=public --prod;",
     "random": "node getRandomEpisode.mjs"
   },
   "keywords": [],
