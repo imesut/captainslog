@@ -98,7 +98,8 @@
             {{ $episodeCount }} / {{ $grandtotal }}
             <br>
             <span style="font-size: small;">
-                {{ printf "%.01f" (float (math.Mul (math.Div $episodeCount $grandtotal) 100)) }}% Reviewed
+
+                {{ printf "%.01f" (math.Div (math.Mul $episodeCount 100) (float $grandtotal)) }}% Reviewed
             </span>
         </td>
         <td style="text-align: center;">

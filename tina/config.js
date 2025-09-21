@@ -38,7 +38,71 @@ export default defineConfig({
           cover: {
             image: "/episodeImages/SPN-SSEE.jpg[AUTO]",
             alt: "Cover Photo of <SPN-Episode Name> [AUTO]"
-          }
+          },
+          body: {
+            type: "root",
+            children: [
+              {
+                type: "h2",
+                children: [
+                  { type: "text", text: "The Story, Briefly" },
+                ],
+              },
+              {
+                type: "p",
+                children: [
+                  { type: "text", text: "Lorem Ipsum Dolor Sit Amet, try not to exceed 250 characters." },
+                ],
+              },
+              {
+                type: "p",
+                children: [
+                  { type: "text", text: "Name of the episode:", bold: true },
+                ],
+              },
+              {
+                type: "p",
+                children: [
+                  { type: "text", text: "Describe the story of the name" },
+                ],
+              },
+              {
+                type: "h2",
+                children: [
+                  { type: "text", text: "Thoughts" },
+                ],
+              },
+              {
+                type: "p",
+                children: [
+                  { type: "text", text: "Intro" },
+                ],
+              },
+              {
+                type: "ul",
+                children: [
+                  {
+                    type: "li",
+                    children: [
+                      {
+                        type: "p",
+                        children: [{ type: "text", text: "Point 1" }],
+                      },
+                    ],
+                  },
+                  {
+                    type: "li",
+                    children: [
+                      {
+                        type: "p",
+                        children: [{ type: "text", text: "Point 2" }],
+                      },
+                    ],
+                  },
+                ],
+              },
+            ],
+          },
         }
         ,
         ui: {
@@ -57,9 +121,9 @@ export default defineConfig({
               ...values,
               cover: {
                 image: "/episodeImages/" + values.SpinoffCode + "-" + ("0" + values?.Season).slice(-2) + ("0" + values?.Episode).slice(-2) + ".jpg",
-                alt: "Cover Photo of " + values.SpinoffCode + " " + ("0" + values?.Season).slice(-2) + ("0" + values?.Episode).slice(-2) + " " + values.EpisodeName 
+                alt: "Cover Photo of " + values.SpinoffCode + " " + ("0" + values?.Season).slice(-2) + ("0" + values?.Episode).slice(-2) + " " + values.EpisodeName
               },
-              OverallScore: Number((values.StarTrekValues * values.Inspiring * values.StoryDevelopment / ( 5 * 5 * 5 ) * 100).toFixed(2)),
+              OverallScore: Number((values.StarTrekValues * values.Inspiring * values.StoryDevelopment / (5 * 5 * 5) * 100).toFixed(2)),
               Title: values?.SpinoffCode + "-" + ("0" + values?.Season).slice(-2) + ("0" + values?.Episode).slice(-2) + " " + values?.EpisodeName,
             }
           }

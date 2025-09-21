@@ -1,0 +1,1 @@
+cd ~/Documents/Github/captainslog; npm run random

@@ -6,6 +6,8 @@ const reviewsPath = "content/review"
 const jsonFileName = "allEpisodes.json"
 const episodesCsvLink = "https://docs.google.com/spreadsheets/d/e/2PACX-1vSto91mm4BRRpvfF6fYDSKQD5tHAod9dcZzKEdUH0qlV8Uc1hxhmArDtsHMjPOcEeu3n20JaljDpEJV/pub?gid=0&single=true&output=csv"
 
+const daysOfValidCache = 60
+
 var allEpisodesList = []
 var randomlySelectedEpisode = []
 
@@ -39,11 +41,11 @@ function checkDataFile() {
                     const msDiff = today.getTime() - lastModifiedDate.getTime()
                     const dayDifference = Math.round(msDiff / (24 * 60 * 60 * 60))
 
-                    if (dayDifference < 7) {
+                    if (dayDifference < daysOfValidCache) {
                         console.log("Data file is current")
                         res(true)
                     } else {
-                        console.log("Data file is older than 7 days.")
+                        console.log(`Data file is older than ${daysOfValidCache} days.`)
                         rej(false)
                     }
                 }
