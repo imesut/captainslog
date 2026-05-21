@@ -33,6 +33,7 @@ COPY package*.json ./
 RUN npm install
 
 COPY . .
+RUN rm -rf themes/PaperMod && hugo mod download
 
 EXPOSE 1313
 
