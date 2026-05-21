@@ -17,7 +17,8 @@ export default defineConfig({
   build: {
     outputFolder: "admin",
     publicFolder: "static",
-    host: "0.0.0.0",
+    host: process.env.TINA_HOST || true,
+    port: process.env.TINA_PORT ? parseInt(process.env.TINA_PORT) : 4001,
   },
   media: {
     tina: {
