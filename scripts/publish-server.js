@@ -3,10 +3,12 @@ const express = require('express');
 const cors = require('cors');
 const { spawn } = require('child_process');
 const path = require('path');
+const router = express.Router();
 
 const app = express();
 app.use(cors());
 
+app.use('/s', router);
 
 //dev: 'Start TinaCMS + Hugo preview',
 const scripts = {
@@ -17,20 +19,20 @@ const scripts = {
   random: 'Get a random episode',
 };
 
-app.get('/scripts', (req, res) => {
+router.get('/scripts', (req, res) => {
   res.json(scripts);
 });
 
-// Serve client JS from the static folder
-app.use('/js', express.static(path.join(__dirname, '..', 'static', 'js')));
 // Serve simple UI page
-app.get('/publish', (req, res) => {
+router.get('/publish', (req, res) => {
   res.sendFile(path.join(__dirname, 'publish-ui.html'));
 });
-app.get('/', (req, res) => res.redirect('/publish'));
+
+router.get('/', (req, res) => res.redirect('/s/publish'));
+app.get('/', (req, res) => res.redirect('/s'));
 
 // SSE endpoint to stream script output
-app.get('/run', (req, res) => {
+router.get('/run', (req, res) => {
   const name = req.query.script;
   if (!name || !scripts[name]) {
     res.status(400).json({ error: 'script not found' });
@@ -75,6 +77,7 @@ app.get('/run', (req, res) => {
 });
 
 const port = process.env.PUBLISH_SERVER_PORT || 5555;
+
 app.listen(port, () => {
   console.log(`publish-server listening on http://localhost:${port}`);
 });
