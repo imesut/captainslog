@@ -6,7 +6,7 @@ const reviewsPath = "content/review"
 const jsonFileName = "allEpisodes.json"
 const episodesCsvLink = "https://docs.google.com/spreadsheets/d/e/2PACX-1vSto91mm4BRRpvfF6fYDSKQD5tHAod9dcZzKEdUH0qlV8Uc1hxhmArDtsHMjPOcEeu3n20JaljDpEJV/pub?gid=0&single=true&output=csv"
 
-const daysOfValidCache = 60
+const daysOfValidCache = 180
 
 var allEpisodesList = []
 var randomlySelectedEpisode = []

@@ -33,8 +33,11 @@ let getImdbImage = (imdb, episodeCode) => {
     fetch(imdb)
         .then(response => response.text())
         .then(async (body) => {
+            console.log(body);
             let $ = cheerio.load(body);
+            console.log($('meta[property="og:image"]'));
             let imageUrl = $('meta[property="og:image"]').attr('content') || $('meta[property="og:image:url"]').attr('content')
+            console.log(imageUrl)
             let imgDownload = await fetch(imageUrl);
             let destination = path.resolve(episodePhotosPath, episodeCode + ".jpg");
             let fileStream = fs.createWriteStream(destination, { flags: 'wx' });
