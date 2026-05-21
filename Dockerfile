@@ -1,4 +1,4 @@
-FROM node:20-bullseye-slim
+FROM node:20-bookworm-slim
 
 WORKDIR /app
 
@@ -8,9 +8,10 @@ RUN apt-get update && apt-get install -y --no-install-recommends \
   chromium \
   git \
   unzip \
+  libc6 \
   && rm -rf /var/lib/apt/lists/*
 
-ARG GO_VERSION=1.25.1
+ARG GO_VERSION=1.24.3
 RUN curl -fsSL -o /tmp/go.tar.gz \
   "https://go.dev/dl/go${GO_VERSION}.linux-amd64.tar.gz" \
   && rm -rf /usr/local/go \
@@ -19,7 +20,7 @@ RUN curl -fsSL -o /tmp/go.tar.gz \
 
 ENV PATH="/usr/local/go/bin:$PATH"
 
-ARG HUGO_VERSION=0.116.0
+ARG HUGO_VERSION=0.161.1
 RUN curl -fsSL -o /tmp/hugo.tar.gz \
   "https://github.com/gohugoio/hugo/releases/download/v${HUGO_VERSION}/hugo_extended_${HUGO_VERSION}_Linux-64bit.tar.gz" \
   && tar -xzf /tmp/hugo.tar.gz -C /tmp \
@@ -33,7 +34,8 @@ COPY package*.json ./
 RUN npm install
 
 COPY . .
-RUN rm -rf themes/PaperMod && hugo mod download
+RUN git clone --depth=1 https://github.com/adityatelange/hugo-PaperMod.git themes/PaperMod
+RUN hugo mod get -u
 
 EXPOSE 1313
 
