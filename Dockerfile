@@ -20,7 +20,7 @@ ENV CHROME_BIN=/usr/bin/chromium
 ENV PUBLISH_SERVER_PORT=5555
 
 COPY package*.json ./
-RUN npm ci
+RUN npm install
 
 COPY . .
 
