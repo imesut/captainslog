@@ -7,9 +7,17 @@ RUN apt-get update && apt-get install -y --no-install-recommends \
   ca-certificates \
   chromium \
   git \
-  golang-go \
   unzip \
   && rm -rf /var/lib/apt/lists/*
+
+ARG GO_VERSION=1.25.1
+RUN curl -fsSL -o /tmp/go.tar.gz \
+  "https://go.dev/dl/go${GO_VERSION}.linux-amd64.tar.gz" \
+  && rm -rf /usr/local/go \
+  && tar -C /usr/local -xzf /tmp/go.tar.gz \
+  && rm /tmp/go.tar.gz
+
+ENV PATH="/usr/local/go/bin:$PATH"
 
 ARG HUGO_VERSION=0.116.0
 RUN curl -fsSL -o /tmp/hugo.tar.gz \
