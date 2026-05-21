@@ -1,0 +1,90 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width,initial-scale=1" />
+    <title>Publish - Scripts</title>
+    <style>
+        body {
+            font-family: system-ui, Segoe UI, Roboto, Helvetica, Arial, sans-serif;
+            margin: 20px
+        }
+
+        .publish-btn {
+            margin: 6px;
+            padding: 8px 12px
+        }
+
+        pre {
+            background: #000;
+            color: #0f0;
+            padding: 12px;
+            height: 400px;
+            overflow: auto
+        }
+
+        li{
+            display: block;
+        }
+    </style>
+</head>
+
+<body>
+    <h1>Publish — Scripts</h1>
+    <p>Press a button to run the corresponding npm script on this machine. Output streams below.</p>
+    <ul id="scripts-list"></ul>
+    <h2>Output</h2>
+    <pre id="publish-output"></pre>
+    <script>
+        document.addEventListener('DOMContentLoaded', async () => {
+            const container = document.getElementById('publish-container');
+            const scriptsList = document.getElementById('scripts-list');
+            const output = document.getElementById('publish-output');
+
+            const base = (window.PUBLISH_SERVER_BASE || '') || '';
+            const scriptsRes = await fetch(base + '/scripts');
+            const scripts = await scriptsRes.json();
+
+            Object.keys(scripts).forEach(name => {
+                const btn = document.createElement('button');
+                btn.textContent = name;
+                btn.className = 'publish-btn';
+                btn.addEventListener('click', () => runScript(name));
+                const li = document.createElement('li');
+                li.appendChild(btn);
+                scriptsList.appendChild(li);
+            });
+
+            async function runScript(name) {
+                output.textContent = '';
+                const es = new EventSource(base + '/run?script=' + encodeURIComponent(name));
+                es.addEventListener('stdout', (e) => {
+                    appendOutput(e.data);
+                });
+                es.addEventListener('stderr', (e) => {
+                    appendOutput(e.data);
+                });
+                es.addEventListener('exit', (e) => {
+                    appendOutput('\nProcess exited with code: ' + e.data + '\n');
+                });
+                es.addEventListener('done', () => {
+                    es.close();
+                });
+                es.onerror = (err) => {
+                    appendOutput('\n[connection error]\n');
+                    es.close();
+                };
+            }
+
+            function appendOutput(s) {
+                // Unescape our newline encoding
+                const text = s.replace(/\\n/g, '\n');
+                output.textContent += text;
+                output.scrollTop = output.scrollHeight;
+            }
+        });
+    </script>
+</body>
+
+</html>

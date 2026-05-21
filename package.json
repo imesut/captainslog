@@ -6,10 +6,12 @@
   "scripts": {
     "dev": "tinacms dev -c \"open http://localhost:1313/admin/#/collections/review/ && hugo serve\"",
     "metadata": "node prepareReviewsMetadata.mjs",
-    "pdf": "/Applications/Google\\ Chrome.app/Contents/MacOS/Google\\ Chrome --headless --print-to-pdf=public/captainslog.pdf --no-pdf-header-footer file://$(pwd)/public/pdf/index.html; cp public/captainslog.pdf content/captainslog.pdf;",
+    "pdf": "if [ -n \"$CHROME_BIN\" ]; then \"$CHROME_BIN\" --headless --print-to-pdf=public/captainslog.pdf --no-pdf-header-footer file://$(pwd)/public/pdf/index.html; else \"/Applications/Google Chrome.app/Contents/MacOS/Google Chrome\" --headless --print-to-pdf=public/captainslog.pdf --no-pdf-header-footer file://$(pwd)/public/pdf/index.html; fi; cp public/captainslog.pdf content/captainslog.pdf;",
     "images": "npm run metadata; node fetchImages.mjs",
     "build": "hugo; npm run images; npm run pdf",
-    "publish": "npm run build; netlify deploy --no-build --dir=public --prod;",
+    "deploy:netlify": "npm run build && npx netlify deploy --no-build --dir=public --prod --site=$NETLIFY_SITE_ID",
+    "publish": "npm run deploy:netlify",
+    "publish-server": "node scripts/publish-server.js",
     "random": "node getRandomEpisode.mjs"
   },
   "keywords": [],
@@ -23,6 +25,9 @@
     "tinacms": "^1.6.3"
   },
   "devDependencies": {
-    "@tinacms/cli": "^1.5.45"
+    "@tinacms/cli": "^1.5.45",
+    "netlify-cli": "^26.0.0",
+    "express": "^4.18.2",
+    "cors": "^2.8.5"
   }
 }
