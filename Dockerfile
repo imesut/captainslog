@@ -9,7 +9,10 @@ RUN apt-get update && apt-get install -y --no-install-recommends \
   git \
   unzip \
   libc6 \
+  nginx \
   && rm -rf /var/lib/apt/lists/*
+
+COPY nginx.conf /etc/nginx/sites-available/default
 
 ARG GO_VERSION=1.24.3
 RUN curl -fsSL -o /tmp/go.tar.gz \
@@ -39,8 +42,8 @@ COPY . .
 RUN git clone --depth=1 https://github.com/adityatelange/hugo-PaperMod.git themes/PaperMod
 RUN hugo mod get -u
 
-EXPOSE 1313
-EXPOSE 4001
+EXPOSE 80
 EXPOSE 5555
 
-CMD ["npm", "run", "start:dokploy"]
+# CMD ["npm", "run", "start:dokploy"]
+CMD ["sh", "-c", "nginx && npm run start:dokploy"]
