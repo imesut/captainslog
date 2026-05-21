@@ -33,10 +33,14 @@ ENV PUBLISH_SERVER_PORT=5555
 COPY package*.json ./
 RUN npm install
 
+RUN npm install concurrently
+
 COPY . .
 RUN git clone --depth=1 https://github.com/adityatelange/hugo-PaperMod.git themes/PaperMod
 RUN hugo mod get -u
 
 EXPOSE 1313
+EXPOSE 4001
+EXPOSE 5555
 
-CMD ["npm", "run", "dev:dokploy"]
+CMD ["npm", "run", "start:dokploy"]

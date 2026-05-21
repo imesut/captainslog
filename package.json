@@ -13,7 +13,8 @@
     "deploy:netlify": "npm run build && npx netlify deploy --no-build --dir=public --prod --site=$NETLIFY_SITE_ID",
     "publish": "npm run deploy:netlify",
     "publish-server": "node scripts/publish-server.js",
-    "random": "node getRandomEpisode.mjs"
+    "random": "node getRandomEpisode.mjs",
+    "start:dokploy": "concurrently \"npm run dev:dokploy\" \"npm run publish-server\""
   },
   "keywords": [],
   "author": "",
