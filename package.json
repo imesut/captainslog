@@ -5,7 +5,7 @@
   "main": "index.js",
   "scripts": {
     "dev": "tinacms dev -c \"open http://localhost:1313/admin/#/collections/review/ && hugo serve\"",
-    "dev:dokploy": "tinacms dev -c \"hugo serve --bind 0.0.0.0 --port 1313 --appendPort=false\"",
+    "dev:dokploy": "DANGEROUSLY_DISABLE_HOST_CHECK=true tinacms dev -c \"hugo serve --bind 0.0.0.0 --port 1313 --appendPort=false\"",
     "metadata": "node prepareReviewsMetadata.mjs",
     "pdf": "if [ -n \"$CHROME_BIN\" ]; then \"$CHROME_BIN\" --headless --print-to-pdf=public/captainslog.pdf --no-pdf-header-footer file://$(pwd)/public/pdf/index.html; else \"/Applications/Google Chrome.app/Contents/MacOS/Google Chrome\" --headless --print-to-pdf=public/captainslog.pdf --no-pdf-header-footer file://$(pwd)/public/pdf/index.html; fi; cp public/captainslog.pdf content/captainslog.pdf;",
     "images": "npm run metadata; node fetchImages.mjs",
