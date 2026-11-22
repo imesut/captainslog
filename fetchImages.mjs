@@ -9,7 +9,7 @@ let episodePhotosPath = "static/episodeImages/"
 function getMetadata() {
     let fileContent = fs.readFileSync("reviews.json", { encoding: "utf-8" })
     let jsonContent = JSON.parse(fileContent)
-    
+
     return jsonContent.map(({
         SpinoffCode,
         Episode,
@@ -30,10 +30,19 @@ let getLocalPath = (episodeCode) => {
 
 let getImdbImage = (imdb, episodeCode) => {
     console.log("Fetching imdb link:", imdb, "...");
-    fetch(imdb)
-        .then(response => response.text())
+    fetch(imdb, {
+        headers: {
+            "User-Agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/131.0.0.0 Safari/537.36",
+            "Accept": "text/html,application/xhtml+xml,application/xml;q=0.9,image/avif,image/webp,*/*;q=0.8",
+            "Accept-Language": "en-US,en;q=0.9",
+        }
+    })
+        .then(response => {
+            console.log(response);
+            return response.text();
+        })
         .then(async (body) => {
-            console.log(body);
+            console.log("body", body);
             let $ = cheerio.load(body);
             console.log($('meta[property="og:image"]'));
             let imageUrl = $('meta[property="og:image"]').attr('content') || $('meta[property="og:image:url"]').attr('content')

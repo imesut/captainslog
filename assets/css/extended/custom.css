@@ -13,3 +13,26 @@
 .captainslog-bar:hover .Bar {
   margin-top: 5px !important;
 }
+
+h1,h2,h3,h4,h5,h6,p {
+    margin-top: 1em;
+    margin-bottom: 1em;
+}
+
+.CLLogCell {
+  padding-left: 16px;
+  padding-right: 16px;
+  font-family: monospace;
+  font-size: 0.7em;
+  width: 25%;
+  border-left: 1px solid #F15025;
+  border-right: 1px solid #F15025;
+}
+
+.CLLogCellValue {
+  font-size: 1.2em;
+}
+
+/* td, th {
+  border: 1px solid #F15025 !important;
+} */

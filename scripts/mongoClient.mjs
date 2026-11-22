@@ -64,3 +64,20 @@ export async function fetchReviewBySlug(slug) {
   const doc = await collection.findOne({ slug });
   return normalizeReviewDoc(doc);
 }
+
+export async function upsertReviewDoc(review) {
+  if (!review || !review.slug) return null;
+  const collection = await getReviewCollection();
+  const { slug, ...rest } = review;
+  const now = new Date();
+  const update = { $set: { ...rest, slug, updatedAt: now }, $setOnInsert: { importedAt: now } };
+  const result = await collection.updateOne({ slug }, update, { upsert: true });
+  return result;
+}
+
+export async function deleteReviewBySlug(slug) {
+  if (!slug) return null;
+  const collection = await getReviewCollection();
+  const result = await collection.deleteOne({ slug });
+  return result;
+}

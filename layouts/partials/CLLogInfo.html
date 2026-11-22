@@ -4,57 +4,46 @@
 {{ $spinoffCode := .Page.Param "SpinoffCode" }}
 {{ $spinoffData := index .Site.Data "spinoffs" $spinoffCode }}
 
+{{- $totalScore := .Param "OverallScore" -}}
+{{- $starCount := (int (add (div $totalScore 20) 1)) -}}
+{{- $filledStars := strings.Repeat $starCount "⭐️" -}}
+{{- $emptyStars := strings.Repeat (sub 5 $starCount) "☆" -}}
+{{- $stars := printf "%s%s" $filledStars $emptyStars -}}
+
 <div id="CLLogInfo" class="post-content">
-    
-    <center style="margin-bottom: 24px; margin-top: -12px">
-        <span style="font-size: 12px;"><a href='{{.Page.Param "imdb"}}'>Image Credits: IMDB</a> 🖖</span>
-    </center>
+    <table style="text-align: center; display: grid;">
+        <tbody style="width: 100%; display: table;">
+            <tr>
+                <td class="CLLogCell">Overall Score</td>
+                <td class="CLLogCell">Star Trek Values</td>
+                <td class="CLLogCell">Inspiring</td>
+                <td class="CLLogCell">Story Development</td>
+            </tr>
+            <tr>
+                <td class="CLLogCell CLLogCellValue">
+                    <span>
+                        {{- printf "%.2f" (div (float (mul $values $inspiring $storyDev 100)) (mul 5 5 5)) -}}<sub>/100</sub>
+                    </span>
+                    <br>
+                    <span style="font-size: 0.75em; margin-top: -10px;">{{$stars}}</span>
 
-    {{/* {{ if $spinoffData.logo }}
-    <a href='/tags/{{ $spinoffCode }}'>
-        <img src="{{ $spinoffData.logo }}" alt="{{$spinoffData.name}} Spinoff Logo" height="40">
-    </a>
-    {{ end }} */}}
-    <code>
-        <a href='/tags/{{ $spinoffCode }}'>{{ $spinoffData.name }}-{{ $spinoffData.year }}</a>
-    </code>
-    <code>
-        Season: {{- printf "%02d" (.Page.Param "Season") -}}    
-    </code>
-    <code>
-        Episode: {{- printf "%02d" (.Page.Param "Episode") -}}      
-    </code>
+                </td>
+                <td class="CLLogCell CLLogCellValue">{{ printf "%.2f" (float $values) }}<sub>/5</sub></td>
+                <td class="CLLogCell CLLogCellValue">{{ printf "%.2f" (float $inspiring) }}<sub>/5</sub></td>
+                <td class="CLLogCell CLLogCellValue">{{ printf "%.2f" (float $storyDev) }}<sub>/5</sub></td>
+            </tr>
+        </tbody>
+    </table>
 
-
-    <br><br>
-
-    <code>
-        Overall Score: &emsp;&emsp;&emsp;&emsp;&emsp; <strong>
-            {{- printf "%.2f" (div (float (mul $values $inspiring $storyDev 100)) (mul 5 5 5)) -}}
-        </strong> / 100
-    </code>
-    <br>
-    <code>
-        Star Trek Values: &emsp;&emsp; {{ printf "%.2f" (float $values) }} / 5
-    </code>
-    <br>
-    <code>
-        Inspiring: &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp; {{ printf "%.2f" (float $inspiring) }} / 5
-    </code>
-    <br>
-    <code>
-        Story Development: &emsp; {{ printf "%.2f" (float $storyDev) }} / 5
-    </code>
-
-
-    {{ if (.Page.Param "imdb") }}
-    <br><br>
-    <code>
-            <a href='{{.Page.Param "imdb"}}'>View Episode (Imbd)</a>
+     <center>
+        <code style="font-size: 0.7em;">
+            <a href='/tags/{{ $spinoffCode }}'>{{ $spinoffData.name }} - {{ $spinoffData.year }}</a>
+            <span style="color: #F15025;">|</span> Season: <span style="color: #F15025;">{{- printf " %02d " (.Page.Param "Season") -}}</span> 
+            <span style="color: #F15025;">|</span> Episode:<span style="color: #F15025;">{{- printf " %02d " (.Page.Param "Episode") -}}</span>
+            <span style="color: #F15025;">|</span> 
+            {{ if (.Page.Param "imdb") }}
+                <a href='{{.Page.Param "imdb"}}'>Image Credits: IMDB (View Episode)</a>
+            {{ end }}
         </code>
-    {{ end }}
-
-
-    <br>
-    <br>
+    </center>
 </div>

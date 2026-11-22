@@ -5,11 +5,11 @@
     {{ partial "breadcrumbs.html" . }}
     <h1 class="post-title">
 
-      {{/*  {{ $code := .Param "SpinoffCode"}}
+      {{/* {{ $code := .Param "SpinoffCode"}}
       {{ if $code }}
-        {{- $spinoff := (index .Site.Data "spinoffs" $code) -}}
-        <img src="{{$spinoff.logo}}" alt="{{$spinoff.name}} Logo" height="32" style="margin: 0; display: inline">
-      {{ end }}  */}}
+      {{- $spinoff := (index .Site.Data "spinoffs" $code) -}}
+      <img src="{{$spinoff.logo}}" alt="{{$spinoff.name}} Logo" height="32" style="margin: 0; display: inline">
+      {{ end }} */}}
 
       {{ .Title }}
       {{- if .Draft }}<sup><span class="entry-isdraft">&nbsp;&nbsp;[draft]</span></sup>{{- end }}
@@ -36,7 +36,7 @@
   {{- partial "toc.html" . }}
   {{- end }}
 
-  
+
   {{- if .Content }}
   {{ if .Page.Param "SpinoffCode"}}
   {{ partial "CLLogInfo.html" . }}
@@ -47,10 +47,25 @@
     {{- if not (.Param "disableAnchoredHeadings") }}
     {{- partial "anchored_headings.html" .Content -}}
     {{- else }}
-      {{ .Content }}
+    {{ .Content }}
     {{ end }}
-  </div>
+
+    {{ with .Params.numberone }}
+    <div>
+      <div class="numberone" style="border: 1px dashed; border-color: #F15025; padding: 1em; border-radius: 8px; margin-top: 50px;">
+        <span style=" margin-top: -34px; position: absolute; background: var(--theme); padding-left: 10px; padding-right: 10px; font-weight: 500; color: #F15025;">
+          My Number One*
+        </span>
+        {{ . | markdownify }}
+      </div>
+      <div style="color: #F15025; font-size: 0.8em; padding-left: 1em;">
+        (i) My Number One section is a quick summary of what my Number One (my wife) has said differently.
+      </div>
+    </div>
+    {{ end }}
+
   {{- end }}
+
 
   {{ partial "SaluteDivider.html" }}
 

@@ -255,6 +255,12 @@ export default defineConfig({
             isBody: true,
           },
           {
+            type: "rich-text",
+            name: "numberone",
+            label: "Number One Opinions",
+            isBody: false,
+          },
+          {
             label: "Cover Photo [AUTO]",
             name: "cover",
             type: "object",
